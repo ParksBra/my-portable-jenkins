@@ -10,6 +10,7 @@ services:
     volumes:
       - jenkins_data:/var/jenkins_home
       - jenkins_master_venv:/opt/master-venv
+      - jenkins_terraform_store:/mnt/terraform
     networks:
       - lab
 
@@ -67,6 +68,8 @@ volumes:
   jenkins_data:
     driver: local
   jenkins_master_venv:
+    driver: local
+  jenkins_terraform_store:
     driver: local
 
 networks:
