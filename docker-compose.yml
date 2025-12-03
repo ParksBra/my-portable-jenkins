@@ -16,6 +16,14 @@ services:
         aliases:
           - jenkins
       lab_access:
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4G
+        reservations:
+          cpus: '0.05'
+          memory: 256M
 
   infisical_backend:
     container_name: infisical-backend
@@ -40,6 +48,14 @@ services:
         aliases:
           - infisical
       lab_access:
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.05'
+          memory: 256M
 
   infisical_redis:
     image: redis
@@ -54,6 +70,14 @@ services:
           - redis
     volumes:
       - infisical_redis_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.05'
+          memory: 256M
 
   infisical_db:
     container_name: infisical-db
@@ -72,6 +96,14 @@ services:
       interval: 5s
       timeout: 10s
       retries: 10
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.05'
+          memory: 256M
 
   nginx:
     container_name: lab-nginx
@@ -85,6 +117,14 @@ services:
       - jenkins
     networks:
       lab_access:
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
+        reservations:
+          cpus: '0.05'
+          memory: 256M
 
 volumes:
   infisical_pg_data:
