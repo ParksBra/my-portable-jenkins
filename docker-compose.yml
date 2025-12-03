@@ -74,6 +74,7 @@ services:
       retries: 10
 
   nginx:
+    container_name: lab-nginx
     image: nginx:stable-alpine
     ports:
       - "80:80"
