@@ -35,7 +35,7 @@ services:
         condition: service_started
     image: infisical/infisical:latest-postgres
     pull_policy: always
-    env_file: .env
+    env_file: ".env"
     ports:
       - "8070:8080"
     environment:
@@ -60,7 +60,7 @@ services:
   infisical_redis:
     image: redis
     container_name: infisical-dev-redis
-    env_file: .env
+    env_file: ".env"
     restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
@@ -83,7 +83,7 @@ services:
     container_name: infisical-db
     image: postgres:14-alpine
     restart: always
-    env_file: .env
+    env_file: ".env"
     volumes:
       - infisical_pg_data:/var/lib/postgresql/data
     networks:
@@ -108,11 +108,12 @@ services:
   nginx:
     container_name: lab-nginx
     image: nginx:stable-alpine
+    restart: unless-stopped
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./src/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - nginx_logs:/var/log/nginx
     depends_on:
       - infisical_backend
